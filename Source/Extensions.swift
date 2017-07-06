@@ -17,10 +17,12 @@ extension UITableView {
     }
     
     func setGestureEnabled(_ enabled: Bool) {
-        gestureRecognizers?.forEach {
-            guard $0 != panGestureRecognizer else { return }
-            
-            $0.isEnabled = enabled
+        if #available(*, iOS 10) {  // Workaround for iOS 11+
+            gestureRecognizers?.forEach {
+                guard $0 != panGestureRecognizer else { return }
+                
+                $0.isEnabled = enabled
+            }
         }
     }
 }
